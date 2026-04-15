@@ -812,118 +812,50 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .nav-item span {
-                display: none;
-            }
-            
-            .nav-item i {
-                font-size: 1.125rem;
-            }
-            
-            .nav-item.btn-primary span {
-                display: none;
-            }
-            
-            .nav-item.btn-primary i {
-                margin: 0;
-            }
-            
-            /* Fix dropdown width and positioning for tablet */
-            .nav-dropdown .dropdown-menu {
-                min-width: 70vw;
-                max-width: 85vw;
-                left: 50% !important;
-                right: auto !important;
-                transform: translateX(-50%) translateY(10px) !important;
-                max-height: 80vh;
-                overflow-y: auto;
-            }
-            
-            .nav-dropdown:hover .dropdown-menu {
-                transform: translateX(-50%) translateY(0) !important;
-            }
-            
-            /* Adjust grid for better tablet display */
-            .nav-dropdown .dropdown-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: var(--space-md);
-            }
-            
-            /* Make dropdown links more compact */
-            .dropdown-link {
-                padding: var(--space-xs) var(--space-sm);
-                font-size: 0.85rem;
-            }
-            
-            /* Adjust specific menus */
-            .personal-menu,
-            .business-menu {
-                min-width: 75vw !important;
-                max-width: 85vw !important;
-            }
-            
-            .company-menu {
-                min-width: 60vw !important;
-                max-width: 75vw !important;
-            }
-            
-            .kids-menu {
-                min-width: 50vw !important;
-                max-width: 70vw !important;
-            }
-        }
+     
+/* ===== DEFAULT (FULL SIZE) - Icons + Text ===== */
+.nav-item i {
+    margin-right: var(--space-xs);
+}
 
-        /* Additional fix for medium-small screens */
-        @media (max-width: 900px) {
-    /* Adjust grid for comfortable two‑column layout */
-    .nav-dropdown .dropdown-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-md);
+/* ===== MEDIUM SIZE - Text Only, Hide Icons ===== */
+/* ===== DEFAULT (FULL SIZE) - Above 1150px: Icons + Text ===== */
+/* This is the default state - no media query needed */
+
+/* ===== MEDIUM SIZE - 901px to 1150px: Text Only, Hide Icons ===== */
+@media (max-width: 1150px) and (min-width: 901px) {
+    .nav-item i {
+        display: none !important;
     }
-
-    .dropdown-col {
-        min-width: 0;          /* Allows text truncation if absolutely needed */
-        overflow: visible;     /* Prevents child cut‑off */
+    
+    .nav-item span {
+        display: inline-block !important;
     }
-
-    .dropdown-section-header {
-        font-size: 0.7rem;
-        white-space: normal;   /* Allow header text to wrap */
-        word-break: break-word;
+    
+    .nav-item.btn-primary i {
+        display: none !important;
     }
-
-    /* Ensure dropdown links never overflow horizontally */
-    .dropdown-link,
-    .plan-link {
-        white-space: normal;
-        word-break: break-word;
-        padding: var(--space-sm) var(--space-md);
-        overflow: visible;
+    
+    .nav-item.btn-primary span {
+        display: inline-block !important;
     }
-
-    /* Give the large menus more width but keep them inside the viewport */
-    .personal-menu,
-    .business-menu {
-        min-width: 85vw !important;
-        max-width: 90vw;       /* Hard limit to prevent edge clipping */
-    }
-
-    .company-menu {
-        min-width: 60vw !important;
+    
+    /* Dropdown positioning for medium screens */
+    .nav-dropdown .dropdown-menu {
+        min-width: 70vw;
         max-width: 85vw;
+        left: auto !important;
+        right: 0 !important;
+        transform: translateY(10px) !important;
+        max-height: 80vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
-
-    .kids-menu {
-        min-width: 50vw !important;
-        max-width: 80vw;
+    
+    .nav-dropdown:hover .dropdown-menu {
+        transform: translateY(0) !important;
     }
-
-    /* --- CRITICAL POSITIONING FIX --- */
-    /* Anchor all dropdowns to the RIGHT edge of the nav bar.
-       This guarantees the content expands leftward and never gets cut off
-       on the right side of the screen. */
+    
     .personal-menu,
     .business-menu,
     .company-menu,
@@ -931,172 +863,416 @@
         left: auto !important;
         right: 0 !important;
         transform: translateY(10px) !important;
+        min-width: 300px !important;
+        max-width: 400px !important;
     }
-
+    
     .nav-dropdown:hover .personal-menu,
     .nav-dropdown:hover .business-menu,
     .nav-dropdown:hover .company-menu,
     .nav-dropdown:hover .kids-menu {
         transform: translateY(0) !important;
     }
-
-    /* Add vertical scrolling for very tall menus (e.g., on short laptop screens) */
+    
+    .nav-dropdown .dropdown-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-md);
+    }
+    
+    .business-menu .dropdown-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
     .dropdown-menu {
-        max-height: 80vh;
-        overflow-y: auto;
-        overflow-x: hidden;    /* No horizontal scrollbar, ever */
-        padding-right: var(--space-sm); /* Space for scrollbar without overlapping text */
-        scrollbar-width: thin; /* Firefox: slim scrollbar */
+        overflow-x: hidden !important;
     }
-
-    /* Custom slim scrollbar for WebKit browsers */
-    .dropdown-menu::-webkit-scrollbar {
-        width: 6px;
+    
+    .dropdown-menu * {
+        max-width: 100%;
     }
-
-    .dropdown-menu::-webkit-scrollbar-track {
-        background: var(--surface-hover);
-        border-radius: var(--radius-full);
-    }
-
-    .dropdown-menu::-webkit-scrollbar-thumb {
-        background: var(--primary);
-        border-radius: var(--radius-full);
-    }
-
-    /* Prevent plan cards from stretching too wide */
-    .plans-col {
-        min-width: 140px;
-    }
-
-    .plan-link {
-        flex-wrap: wrap;
-        gap: var(--space-xs);
-    }
-
-    .plan-name {
-        font-size: 0.85rem;
-    }
-
-    .plan-price {
-        font-size: 0.75rem;
-        margin-left: 0;
-    }
-
-    /* Ensure the navigation row itself doesn't cause overflow */
+    
     .nav-row {
-        overflow-x: auto;
-        overflow-y: visible;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        padding-bottom: 4px;   /* Space for hover effects */
+        overflow: visible !important;
     }
-
-    .nav-row::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Keep all nav items from shrinking and getting cut off */
-    .nav-item {
-        flex-shrink: 0;
+    
+    .floating-nav {
+        overflow: visible !important;
     }
 }
 
-/* Fix for the transition between tablet and mobile */
-@media (max-width: 800px) {
+/* ===== SMALL SIZE - 900px and below: Icons Only, Hide Text ===== */
+@media (max-width: 900px) {
+    .nav-item i {
+        display: inline-block !important;
+        font-size: 1.125rem;
+        margin-right: 0 !important;
+    }
+    
+    .nav-item span {
+        display: none !important;
+    }
+    
+    .nav-item.btn-primary i {
+        display: inline-block !important;
+        margin: 0 !important;
+    }
+    
+    .nav-item.btn-primary span {
+        display: none !important;
+    }
+    
+    /* FIX: Ensure dropdown container has proper positioning */
+    .nav-dropdown {
+        position: relative !important;
+    }
+    
+    /* FIX: Dropdown menu visibility and positioning */
     .nav-dropdown .dropdown-menu {
-        min-width: 85vw;
-        max-width: 92vw;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: auto !important;
+        transform: translateY(10px) !important;
+        margin-top: var(--space-sm) !important;
+        min-width: 280px !important;
+        width: max-content !important;
+        max-width: calc(100vw - 32px) !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding-right: var(--space-sm) !important;
+        scrollbar-width: thin !important;
+        transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    
+    /* FIX: Show dropdown on hover */
+    .nav-dropdown:hover .dropdown-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Right-aligned dropdowns */
+    .nav-dropdown.dropdown-right .dropdown-menu {
         left: auto !important;
         right: 0 !important;
+    }
+    
+    /* Specific menu widths */
+    .personal-menu,
+    .business-menu {
+        min-width: 320px !important;
+    }
+    
+    .company-menu {
+        min-width: 280px !important;
+    }
+    
+    .kids-menu {
+        min-width: 260px !important;
+    }
+    
+    /* Grid layout */
+    .nav-dropdown .dropdown-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: var(--space-md) !important;
+    }
+    
+    .dropdown-col {
+        min-width: 0 !important;
+        overflow: visible !important;
+    }
+    
+    .dropdown-section-header {
+        font-size: 0.7rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    
+    .dropdown-link,
+    .plan-link {
+        white-space: normal !important;
+        word-break: break-word !important;
+        padding: var(--space-sm) var(--space-md) !important;
+        overflow: visible !important;
+    }
+    
+    .plan-link {
+        flex-wrap: wrap !important;
+        gap: var(--space-xs) !important;
+    }
+    
+    .plan-name {
+        font-size: 0.85rem !important;
+    }
+    
+    .plan-price {
+        font-size: 0.75rem !important;
+        margin-left: 0 !important;
+    }
+    
+    /* Scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-track {
+        background: var(--surface-hover) !important;
+        border-radius: var(--radius-full) !important;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb {
+        background: var(--primary) !important;
+        border-radius: var(--radius-full) !important;
+    }
+    
+    /* Navigation row */
+    .nav-row {
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+        padding-bottom: 4px !important;
+    }
+    
+    .nav-row::-webkit-scrollbar {
+        display: none !important;
+    }
+    
+    .nav-item {
+        flex-shrink: 0 !important;
+    }
+    
+       .plans-col {
+        min-width: 140px !important;
+    }
+    
+    /* ADD THIS: Active state for click-based dropdown toggle */
+    .nav-dropdown.active .dropdown-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Prevent hover from interfering on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        
+        .nav-dropdown.active .dropdown-menu,
+        .nav-dropdown.active:hover .dropdown-menu {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: translateY(0) !important;
+        }
+    }
+
+}
+
+/* ===== SMALL SIZE - 900px and below: Icons Only, Hide Text ===== */
+@media (max-width: 900px) and (min-width: 769px) {
+    .nav-item i {
+        display: inline-block !important;
+        font-size: 1.125rem;
+        margin-right: 0 !important;
+    }
+    
+    .nav-item span {
+        display: none !important;
+    }
+    
+    .nav-item.btn-primary i {
+        display: inline-block !important;
+        margin: 0 !important;
+    }
+    
+    .nav-item.btn-primary span {
+        display: none !important;
+    }
+    
+    /* FIX: Make dropdowns behave exactly like medium screens - single column */
+    .nav-dropdown {
+        position: relative !important;
+    }
+    
+    .nav-dropdown .dropdown-menu {
+        min-width: 300px !important;
+        max-width: 400px !important;
+        left: 0 !important;
+        right: auto !important;
         transform: translateY(10px) !important;
-        max-height: 70vh;
+        max-height: 80vh;
         overflow-y: auto;
-        overflow-x: hidden;          /* Absolutely no horizontal scroll */
-        padding: var(--space-md);
-        scrollbar-width: thin;       /* Firefox slim scrollbar */
+        overflow-x: hidden;
+        padding: var(--space-lg) !important;
     }
-
-    /* WebKit slim scrollbar */
-    .nav-dropdown .dropdown-menu::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .nav-dropdown .dropdown-menu::-webkit-scrollbar-track {
-        background: var(--surface-hover);
-        border-radius: var(--radius-full);
-    }
-
-    .nav-dropdown .dropdown-menu::-webkit-scrollbar-thumb {
-        background: var(--primary);
-        border-radius: var(--radius-full);
-    }
-
+    
     .nav-dropdown:hover .dropdown-menu {
         transform: translateY(0) !important;
     }
-
-    /* Make all dropdown links wrap nicely */
+    
+    .personal-menu,
+    .business-menu,
+    .company-menu,
+    .kids-menu {
+        left: 0 !important;
+        right: auto !important;
+        transform: translateY(10px) !important;
+        min-width: 300px !important;
+        max-width: 400px !important;
+    }
+    
+    .nav-dropdown:hover .personal-menu,
+    .nav-dropdown:hover .business-menu,
+    .nav-dropdown:hover .company-menu,
+    .nav-dropdown:hover .kids-menu {
+        transform: translateY(0) !important;
+    }
+    
+    /* SINGLE COLUMN GRID - Same as medium screens */
+    .nav-dropdown .dropdown-grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--space-md);
+    }
+    
+    .business-menu .dropdown-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .company-menu .dropdown-grid.two-columns {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Kids menu also single column */
+    .kids-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .dropdown-menu {
+        overflow-x: hidden !important;
+    }
+    
+    .dropdown-menu * {
+        max-width: 100%;
+    }
+    
+    .nav-row {
+        overflow: visible !important;
+    }
+    
+    .floating-nav {
+        overflow: visible !important;
+    }
+    
+    /* Hide section headers that might be empty or redundant */
+    .dropdown-section-header {
+        font-size: 0.7rem !important;
+        padding-bottom: var(--space-xs) !important;
+        margin-bottom: var(--space-sm) !important;
+    }
+    
+    /* Make dropdown links more compact */
     .dropdown-link,
     .plan-link {
-        white-space: normal;
-        word-break: break-word;
-        padding: var(--space-xs) var(--space-sm);
-        overflow: visible;
+        padding: var(--space-sm) var(--space-md) !important;
+        font-size: 0.9rem !important;
     }
+    
+    /* Plans column styling */
+    .plans-col {
+        background: rgba(99, 102, 241, 0.1);
+        border-radius: var(--radius-lg);
+        padding: var(--space-md);
+        margin-top: var(--space-md);
+    }
+    
+    /* Active state for click-based dropdown toggle */
+    .nav-dropdown.active .dropdown-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+    }
+    
+    .nav-dropdown.active .dropdown-toggle {
+        background: var(--surface-hover) !important;
+        color: var(--primary) !important;
+    }
+    
+    /* Prevent hover from interfering on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        
+        .nav-dropdown.active .dropdown-menu,
+        .nav-dropdown.active:hover .dropdown-menu {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: translateY(0) !important;
+        }
+    }
+}
 
-    /* More compact plan links */
+/* ===== EXTRA SMALL - 800px and below: Keep Icons Only ===== */
+@media (max-width: 800px) {
+    .nav-dropdown .dropdown-menu {
+        min-width: 260px;
+        max-width: calc(100vw - 24px);
+        max-height: 70vh;
+        padding: var(--space-md);
+    }
+    
+    .dropdown-link,
     .plan-link {
-        flex-wrap: wrap;
-        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-sm);
     }
-
+    
     .plan-name {
         font-size: 0.8rem;
     }
-
+    
     .plan-price {
         font-size: 0.7rem;
-        margin-left: 0;
     }
-
-    /* Ensure dropdown grid columns don't force overflow */
-    .dropdown-col {
-        min-width: 0;
-        overflow: visible;
-    }
-
-    /* Keep dropdown section headers readable */
+    
     .dropdown-section-header {
-        font-size: 0.7rem;
-        white-space: normal;
-        word-break: break-word;
+        font-size: 0.65rem;
     }
-
-    /* Prevent any child from causing horizontal scroll */
-    .dropdown-menu * {
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* If there are plan cards or kids cards, ensure they wrap */
+    
     .kids-grid {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
-
+    
     .kids-card {
         white-space: normal;
         word-break: break-word;
     }
+    
+    .dropdown-menu * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 }
 
+/* ===== MOBILE MENU - 768px and below ===== */
 @media (max-width: 768px) {
-    /* Hide desktop nav */
     .floating-nav {
         display: none;
     }
 
-    /* Mobile navigation bar */
     .mobile-nav {
         position: fixed;
         top: 0;
@@ -1146,7 +1322,6 @@
         transform: scale(0.95);
     }
 
-    /* Mobile menu panel – slides from top */
     .mobile-menu-panel {
         position: fixed;
         top: 70px;
@@ -1167,7 +1342,6 @@
         display: flex;
     }
 
-    /* Tabs container – horizontal scroll with hidden scrollbar */
     .mobile-tabs-container {
         padding: var(--space-md) var(--space-sm) 0 var(--space-sm);
         border-bottom: 1px solid var(--border-light);
@@ -1222,7 +1396,6 @@
         border-color: rgba(129, 140, 248, 0.3);
     }
 
-    /* Content area – scrollable vertical, no horizontal overflow */
     .mobile-content-area {
         flex: 1;
         overflow-y: auto;
@@ -1243,7 +1416,6 @@
         border-radius: var(--radius-full);
     }
 
-    /* Section visibility */
     .mobile-menu-section {
         display: none;
     }
@@ -1252,7 +1424,6 @@
         display: block;
     }
 
-    /* Menu list – full width, no overflow */
     .mobile-menu-list {
         max-width: 100%;
         list-style: none;
@@ -1260,7 +1431,6 @@
         padding: 0;
     }
 
-    /* Menu items – wrap text, prevent clipping */
     .mobile-menu-item {
         display: flex;
         align-items: center;
@@ -1294,7 +1464,6 @@
         transform: rotate(180deg);
     }
 
-    /* Submenu – indented and hidden by default */
     .mobile-submenu {
         list-style: none;
         margin: 0 0 0 var(--space-lg);
@@ -1316,7 +1485,6 @@
         min-height: 40px;
     }
 
-    /* Footer with login/signup buttons */
     .mobile-menu-footer {
         padding: var(--space-lg) var(--space-md);
         padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
@@ -1371,7 +1539,6 @@
         transform: scale(0.98);
     }
 
-    /* Global body adjustments */
     body {
         padding-top: 70px;
         overflow-x: hidden;
@@ -1381,7 +1548,6 @@
         overflow: hidden;
     }
 
-    /* Page content spacing */
     .page-content {
         padding-top: 90px;
         padding-left: var(--space-md);
@@ -1395,12 +1561,13 @@
         word-wrap: break-word;
     }
 
-    /* Prevent any element from breaking layout */
     * {
         max-width: 100%;
     }
-   @media (max-width: 375px) {
-    /* Tabs – more compact but still tappable */
+}
+
+/* ===== VERY SMALL - 375px and below ===== */
+@media (max-width: 375px) {
     .mobile-tab {
         padding: 0.5rem 0.75rem;
         font-size: 0.8rem;
@@ -1411,19 +1578,16 @@
         font-size: 0.85rem;
     }
 
-    /* Menu items – reduce font size slightly, keep min height */
     .mobile-menu-item {
         font-size: 0.9rem;
         min-height: 44px;
         padding: var(--space-xs) 0;
     }
 
-    /* Submenu items – slightly smaller */
     .mobile-submenu .mobile-menu-item {
         font-size: 0.85rem;
     }
 
-    /* Footer buttons – compact but still tappable */
     .mobile-btn {
         font-size: 0.8rem;
         padding: 10px var(--space-xs);
@@ -1433,40 +1597,33 @@
         text-overflow: ellipsis;
     }
 
-    /* Brand logo – prevent overflow */
     .mobile-nav .nav-brand {
         font-size: 1.25rem;
         max-width: 65%;
     }
 
-    /* Adjust content area padding */
     .mobile-content-area {
         padding: var(--space-md) var(--space-sm);
     }
 
-    /* Submenu indentation – tighter */
     .mobile-submenu {
         margin-left: var(--space-md);
     }
 
-    /* Tabs container – less horizontal padding */
     .mobile-tabs-container {
         padding: var(--space-sm) var(--space-xs) 0 var(--space-xs);
     }
 
-    /* Footer padding – compact */
     .mobile-menu-footer {
         padding: var(--space-md) var(--space-sm);
         padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
         gap: var(--space-sm);
     }
 
-    /* Page heading – scale down */
     h1 {
         font-size: 2rem;
     }
 
-    /* Prevent any accidental overflow */
     .mobile-menu-panel,
     .mobile-content-area,
     .mobile-menu-list,
@@ -1475,30 +1632,35 @@
         overflow-x: hidden;
     }
 
-    /* Ensure long words break */
     .mobile-menu-item span,
     .mobile-menu-item {
         word-break: break-word;
     }
 
-    /* Menu button icon size */
     .mobile-menu-btn {
         width: 40px;
         height: 40px;
         font-size: 1.3rem;
     }
 }
-}
 
-       /* Fallback for users without JavaScript */
+/* ===== HOVER FALLBACK ===== */
 @media (hover: hover) {
-    /* Ensure dropdowns become visible on hover */
     .nav-dropdown:hover .dropdown-menu {
         opacity: 1 !important;
         visibility: visible !important;
     }
 
-    /* Tablet and smaller screens (≤900px) – right‑edge anchoring */
+    @media (max-width: 1150px) and (min-width: 901px) {
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:hover .personal-menu,
+        .nav-dropdown:hover .business-menu,
+        .nav-dropdown:hover .company-menu,
+        .nav-dropdown:hover .kids-menu {
+            transform: translateY(0) !important;
+        }
+    }
+
     @media (max-width: 900px) {
         .nav-dropdown:hover .dropdown-menu,
         .nav-dropdown:hover .personal-menu,
@@ -1509,8 +1671,7 @@
         }
     }
 
-    /* Desktop screens (≥901px) – keep the original desktop offsets */
-    @media (min-width: 901px) {
+    @media (min-width: 1151px) {
         .nav-dropdown:hover .personal-menu {
             transform: translateX(calc(-50% + 80px)) translateY(0) !important;
         }
@@ -1529,6 +1690,104 @@
     }
 }
          
+/* ===== TOOLTIPS FOR ICONS-ONLY MODE (≤900px) ===== */
+@media (max-width: 900px) and (min-width: 769px) {
+    /* Tooltip container */
+    .nav-item {
+        position: relative !important;
+    }
+    
+    /* Tooltip text */
+    .nav-item::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: -45px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--surface-elevated);
+        color: var(--text-primary);
+        padding: 6px 12px;
+        border-radius: var(--radius-md);
+        font-size: 0.75rem;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-light);
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+        z-index: 10001; /* Higher than dropdown */
+        letter-spacing: 0.3px;
+        backdrop-filter: blur(4px);
+    }
+    
+    /* Tooltip arrow */
+    .nav-item::before {
+        content: '';
+        position: absolute;
+        bottom: -13px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid var(--surface-elevated);
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        z-index: 10001; /* Higher than dropdown */
+        filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.1));
+    }
+    
+    /* Show tooltip on hover - but NOT when dropdown is open */
+    .nav-item:hover::after,
+    .nav-item:hover::before {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* Hide tooltip when dropdown is active */
+    .nav-dropdown.active .nav-item::after,
+    .nav-dropdown.active .nav-item::before {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    .nav-item:hover::after {
+        transform: translateX(-50%) translateY(-2px);
+    }
+    
+    /* Primary button tooltip styling */
+    .nav-item.btn-primary::after {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-color: var(--primary-dark);
+    }
+    
+    .nav-item.btn-primary::before {
+        border-bottom-color: var(--primary);
+    }
+    
+    /* Ensure tooltips don't get cut off */
+    .nav-row {
+        overflow-y: visible !important;
+        padding-bottom: 45px !important; /* Space for tooltips */
+    }
+    
+    .floating-nav {
+        overflow: visible !important;
+    }
+}
+
+/* Extra small screens - smaller tooltips */
+@media (max-width: 800px) and (min-width: 769px) {
+    .nav-item::after {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        bottom: -36px;
+    }
+}
     </style>
 </head>
 <body>
@@ -2422,246 +2681,201 @@
         <p>Discover the perfect account for your needs. From everyday banking to specialized solutions.</p>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // ============================================================
-            // HELPER FUNCTION FOR SCREEN READER ANNOUNCEMENTS
-            // ============================================================
-            
-            function announceToScreenReader(message) {
-                const liveRegion = document.getElementById('liveRegion');
-                if (liveRegion) {
-                    liveRegion.textContent = message;
-                    setTimeout(() => {
-                        liveRegion.textContent = '';
-                    }, 3000);
-                }
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ============================================================
+        // HELPER FUNCTION FOR SCREEN READER ANNOUNCEMENTS
+        // ============================================================
+        
+        function announceToScreenReader(message) {
+            const liveRegion = document.getElementById('liveRegion');
+            if (liveRegion) {
+                liveRegion.textContent = message;
+                setTimeout(() => {
+                    liveRegion.textContent = '';
+                }, 3000);
             }
+        }
+        
+        // ============================================================
+        // FIX: Click/Touch Dropdown Toggle for Icons-Only Mode (769px - 900px)
+        // ============================================================
+        
+        function setupIconModeDropdowns() {
+            const dropdownToggles = document.querySelectorAll('.nav-dropdown .dropdown-toggle');
             
-            // ============================================================
-            // KEYBOARD NAVIGATION (Does NOT interfere with mouse hover)
-            // ============================================================
-            
-            const dropdowns = document.querySelectorAll('.nav-dropdown');
-            let activeKeyboardDropdown = null; // Track which dropdown is opened by keyboard
-            
-            dropdowns.forEach(dropdown => {
-                const toggle = dropdown.querySelector('.dropdown-toggle');
-                const menu = dropdown.querySelector('.dropdown-menu');
-                const menuItems = menu ? menu.querySelectorAll('.dropdown-link, .plan-link, .kids-card') : [];
-                
-                if (!toggle || !menu) return;
-                
-                // Set ARIA attributes
-                toggle.setAttribute('aria-haspopup', 'true');
-                toggle.setAttribute('aria-expanded', 'false');
-                
-                // Keyboard handling for toggle
-                toggle.addEventListener('keydown', function(e) {
-                    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    // Check if we're in icons-only mode (≤900px but >768px since mobile menu handles ≤768px)
+                    const screenWidth = window.innerWidth;
                     
-                    switch(e.key) {
-                        case 'Enter':
-                        case ' ':
-                            e.preventDefault();
-                            if (isExpanded) {
-                                // Close dropdown
-                                menu.style.opacity = '0';
-                                menu.style.visibility = 'hidden';
-                                toggle.setAttribute('aria-expanded', 'false');
-                                activeKeyboardDropdown = null;
-                                announceToScreenReader('Menu closed');
-                            } else {
-                                // Close any other keyboard-opened dropdown first
-                                if (activeKeyboardDropdown && activeKeyboardDropdown !== dropdown) {
-                                    const otherMenu = activeKeyboardDropdown.querySelector('.dropdown-menu');
-                                    const otherToggle = activeKeyboardDropdown.querySelector('.dropdown-toggle');
-                                    if (otherMenu && otherToggle) {
-                                        otherMenu.style.opacity = '0';
-                                        otherMenu.style.visibility = 'hidden';
-                                        otherToggle.setAttribute('aria-expanded', 'false');
-                                    }
+                    if (screenWidth <= 900 && screenWidth > 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const dropdown = this.closest('.nav-dropdown');
+                        
+                        // Close any other open dropdowns
+                        document.querySelectorAll('.nav-dropdown').forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                                otherDropdown.classList.remove('active');
+                                const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
+                                if (otherToggle) {
+                                    otherToggle.setAttribute('aria-expanded', 'false');
                                 }
-                                // Open dropdown
+                            }
+                        });
+                        
+                        // Toggle current dropdown
+                        const isActive = !dropdown.classList.contains('active');
+                        
+                        if (isActive) {
+                            dropdown.classList.add('active');
+                            this.setAttribute('aria-expanded', 'true');
+                            
+                            // Force show the dropdown
+                            const menu = dropdown.querySelector('.dropdown-menu');
+                            if (menu) {
                                 menu.style.opacity = '1';
                                 menu.style.visibility = 'visible';
-                                toggle.setAttribute('aria-expanded', 'true');
-                                activeKeyboardDropdown = dropdown;
-                                announceToScreenReader(toggle.querySelector('span')?.innerText + ' menu opened');
+                                menu.style.pointerEvents = 'auto';
+                                menu.style.transform = 'translateY(0)';
                             }
-                            break;
-                        case 'Escape':
-                            if (isExpanded) {
-                                e.preventDefault();
+                            
+                            const menuName = this.querySelector('span')?.textContent || 'Menu';
+                            announceToScreenReader(menuName + ' menu opened');
+                        } else {
+                            dropdown.classList.remove('active');
+                            this.setAttribute('aria-expanded', 'false');
+                            
+                            // Force hide the dropdown
+                            const menu = dropdown.querySelector('.dropdown-menu');
+                            if (menu) {
                                 menu.style.opacity = '0';
                                 menu.style.visibility = 'hidden';
-                                toggle.setAttribute('aria-expanded', 'false');
-                                activeKeyboardDropdown = null;
-                                toggle.focus();
-                                announceToScreenReader('Menu closed');
+                                menu.style.pointerEvents = 'none';
+                                menu.style.transform = 'translateY(10px)';
                             }
-                            break;
-                        case 'ArrowDown':
-                            e.preventDefault();
-                            if (!isExpanded) {
-                                // Close any other keyboard-opened dropdown first
-                                if (activeKeyboardDropdown && activeKeyboardDropdown !== dropdown) {
-                                    const otherMenu = activeKeyboardDropdown.querySelector('.dropdown-menu');
-                                    const otherToggle = activeKeyboardDropdown.querySelector('.dropdown-toggle');
-                                    if (otherMenu && otherToggle) {
-                                        otherMenu.style.opacity = '0';
-                                        otherMenu.style.visibility = 'hidden';
-                                        otherToggle.setAttribute('aria-expanded', 'false');
-                                    }
-                                }
-                                menu.style.opacity = '1';
-                                menu.style.visibility = 'visible';
-                                toggle.setAttribute('aria-expanded', 'true');
-                                activeKeyboardDropdown = dropdown;
-                                announceToScreenReader(toggle.querySelector('span')?.innerText + ' menu opened');
-                            }
-                            if (menuItems.length > 0) {
-                                menuItems[0].focus();
-                            }
-                            break;
-                        case 'ArrowUp':
-                            e.preventDefault();
-                            if (!isExpanded) {
-                                // Close any other keyboard-opened dropdown first
-                                if (activeKeyboardDropdown && activeKeyboardDropdown !== dropdown) {
-                                    const otherMenu = activeKeyboardDropdown.querySelector('.dropdown-menu');
-                                    const otherToggle = activeKeyboardDropdown.querySelector('.dropdown-toggle');
-                                    if (otherMenu && otherToggle) {
-                                        otherMenu.style.opacity = '0';
-                                        otherMenu.style.visibility = 'hidden';
-                                        otherToggle.setAttribute('aria-expanded', 'false');
-                                    }
-                                }
-                                menu.style.opacity = '1';
-                                menu.style.visibility = 'visible';
-                                toggle.setAttribute('aria-expanded', 'true');
-                                activeKeyboardDropdown = dropdown;
-                                announceToScreenReader(toggle.querySelector('span')?.innerText + ' menu opened');
-                            }
-                            if (menuItems.length > 0) {
-                                menuItems[menuItems.length - 1].focus();
-                            }
-                            break;
-                    }
-                });
-                
-                // Keyboard handling for menu items
-                menuItems.forEach((item, index) => {
-                    item.setAttribute('role', 'menuitem');
-                    item.setAttribute('tabindex', '0');
-                    
-                    item.addEventListener('keydown', function(e) {
-                        switch(e.key) {
-                            case 'Escape':
-                                e.preventDefault();
-                                menu.style.opacity = '0';
-                                menu.style.visibility = 'hidden';
-                                toggle.setAttribute('aria-expanded', 'false');
-                                activeKeyboardDropdown = null;
-                                toggle.focus();
-                                announceToScreenReader('Menu closed');
-                                break;
-                            case 'ArrowDown':
-                                e.preventDefault();
-                                const nextItem = menuItems[index + 1];
-                                if (nextItem) {
-                                    nextItem.focus();
-                                } else {
-                                    menuItems[0].focus();
-                                }
-                                break;
-                            case 'ArrowUp':
-                                e.preventDefault();
-                                const prevItem = menuItems[index - 1];
-                                if (prevItem) {
-                                    prevItem.focus();
-                                } else {
-                                    menuItems[menuItems.length - 1].focus();
-                                }
-                                break;
-                            case 'Home':
-                                e.preventDefault();
-                                menuItems[0].focus();
-                                break;
-                            case 'End':
-                                e.preventDefault();
-                                menuItems[menuItems.length - 1].focus();
-                                break;
-                            case 'Tab':
-                                if (!e.shiftKey) {
-                                    if (index === menuItems.length - 1) {
-                                        setTimeout(() => {
-                                            menu.style.opacity = '0';
-                                            menu.style.visibility = 'hidden';
-                                            toggle.setAttribute('aria-expanded', 'false');
-                                            activeKeyboardDropdown = null;
-                                        }, 10);
-                                    }
-                                } else {
-                                    if (index === 0) {
-                                        setTimeout(() => {
-                                            menu.style.opacity = '0';
-                                            menu.style.visibility = 'hidden';
-                                            toggle.setAttribute('aria-expanded', 'false');
-                                            activeKeyboardDropdown = null;
-                                        }, 10);
-                                    }
-                                }
-                                break;
+                            
+                            const menuName = this.querySelector('span')?.textContent || 'Menu';
+                            announceToScreenReader(menuName + ' menu closed');
                         }
-                    });
-                    
-                    item.addEventListener('focus', function() {
-                        if (activeKeyboardDropdown === dropdown) {
-                            menu.style.opacity = '1';
-                            menu.style.visibility = 'visible';
-                            toggle.setAttribute('aria-expanded', 'true');
-                        }
-                    });
-                });
-                
-                // FIX: Prevent hover/keyboard conflict
-                dropdown.addEventListener('mouseenter', function() {
-                    if (activeKeyboardDropdown === dropdown) {
-                        menu.style.opacity = '';
-                        menu.style.visibility = '';
-                    }
-                });
-                
-                dropdown.addEventListener('mouseleave', function() {
-                    if (activeKeyboardDropdown === dropdown) {
-                        setTimeout(() => {
-                            if (activeKeyboardDropdown === dropdown && !dropdown.matches(':hover')) {
-                                menu.style.opacity = '1';
-                                menu.style.visibility = 'visible';
-                                toggle.setAttribute('aria-expanded', 'true');
-                            }
-                        }, 100);
                     }
                 });
             });
+        }
+        
+        // Close dropdowns when clicking outside (icons-only mode)
+        document.addEventListener('click', function(e) {
+            const screenWidth = window.innerWidth;
             
-            // UPDATED for Issue #1: Handle button clicks properly
-            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    // Prevent any default button behavior
-                    e.preventDefault();
-                    
-                    // For mouse clicks
-                    if (e.detail > 0) {
-                        const dropdown = this.closest('.nav-dropdown');
+            if (screenWidth <= 900 && screenWidth > 768) {
+                if (!e.target.closest('.nav-dropdown')) {
+                    document.querySelectorAll('.nav-dropdown.active').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                        const toggle = dropdown.querySelector('.dropdown-toggle');
+                        if (toggle) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                        }
                         const menu = dropdown.querySelector('.dropdown-menu');
-                        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                        
-                        // Toggle the menu
-                        if (!isExpanded) {
-                            // Close other keyboard-opened dropdowns
+                        if (menu) {
+                            menu.style.opacity = '0';
+                            menu.style.visibility = 'hidden';
+                            menu.style.pointerEvents = 'none';
+                            menu.style.transform = 'translateY(10px)';
+                        }
+                    });
+                }
+            }
+        });
+        
+        // Close dropdowns on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const screenWidth = window.innerWidth;
+                
+                if (screenWidth <= 900 && screenWidth > 768) {
+                    document.querySelectorAll('.nav-dropdown.active').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                        const toggle = dropdown.querySelector('.dropdown-toggle');
+                        if (toggle) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                            toggle.focus();
+                        }
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        if (menu) {
+                            menu.style.opacity = '0';
+                            menu.style.visibility = 'hidden';
+                            menu.style.pointerEvents = 'none';
+                            menu.style.transform = 'translateY(10px)';
+                        }
+                    });
+                }
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const screenWidth = window.innerWidth;
+            
+            if (screenWidth > 900 || screenWidth <= 768) {
+                // Reset all dropdowns when leaving icons-only mode
+                document.querySelectorAll('.nav-dropdown.active').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                    const toggle = dropdown.querySelector('.dropdown-toggle');
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    if (menu) {
+                        menu.style.opacity = '';
+                        menu.style.visibility = '';
+                        menu.style.pointerEvents = '';
+                        menu.style.transform = '';
+                    }
+                });
+            }
+        });
+        
+        // Initialize icons-only mode dropdowns
+        setupIconModeDropdowns();
+        
+        // ============================================================
+        // KEYBOARD NAVIGATION (Does NOT interfere with mouse hover)
+        // ============================================================
+        
+        const dropdowns = document.querySelectorAll('.nav-dropdown');
+        let activeKeyboardDropdown = null; // Track which dropdown is opened by keyboard
+        
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const menuItems = menu ? menu.querySelectorAll('.dropdown-link, .plan-link, .kids-card') : [];
+            
+            if (!toggle || !menu) return;
+            
+            // Set ARIA attributes
+            toggle.setAttribute('aria-haspopup', 'true');
+            toggle.setAttribute('aria-expanded', 'false');
+            
+            // Keyboard handling for toggle
+            toggle.addEventListener('keydown', function(e) {
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                
+                switch(e.key) {
+                    case 'Enter':
+                    case ' ':
+                        e.preventDefault();
+                        if (isExpanded) {
+                            // Close dropdown
+                            menu.style.opacity = '0';
+                            menu.style.visibility = 'hidden';
+                            toggle.setAttribute('aria-expanded', 'false');
+                            activeKeyboardDropdown = null;
+                            announceToScreenReader('Menu closed');
+                        } else {
+                            // Close any other keyboard-opened dropdown first
                             if (activeKeyboardDropdown && activeKeyboardDropdown !== dropdown) {
                                 const otherMenu = activeKeyboardDropdown.querySelector('.dropdown-menu');
                                 const otherToggle = activeKeyboardDropdown.querySelector('.dropdown-toggle');
@@ -2671,328 +2885,368 @@
                                     otherToggle.setAttribute('aria-expanded', 'false');
                                 }
                             }
-                            
+                            // Open dropdown
                             menu.style.opacity = '1';
                             menu.style.visibility = 'visible';
-                            this.setAttribute('aria-expanded', 'true');
-                            announceToScreenReader(this.querySelector('span')?.innerText + ' menu opened');
-                        } else {
+                            toggle.setAttribute('aria-expanded', 'true');
+                            activeKeyboardDropdown = dropdown;
+                            announceToScreenReader(toggle.querySelector('span')?.innerText + ' menu opened');
+                        }
+                        break;
+                    case 'Escape':
+                        if (isExpanded) {
+                            e.preventDefault();
                             menu.style.opacity = '0';
                             menu.style.visibility = 'hidden';
-                            this.setAttribute('aria-expanded', 'false');
-                            announceToScreenReader(this.querySelector('span')?.innerText + ' menu closed');
-                        }
-                        
-                        if (activeKeyboardDropdown === dropdown) {
+                            toggle.setAttribute('aria-expanded', 'false');
                             activeKeyboardDropdown = null;
+                            toggle.focus();
+                            announceToScreenReader('Menu closed');
                         }
+                        break;
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        if (!isExpanded) {
+                            // Close any other keyboard-opened dropdown first
+                            if (activeKeyboardDropdown && activeKeyboardDropdown !== dropdown) {
+                                const otherMenu = activeKeyboardDropdown.querySelector('.dropdown-menu');
+                                const otherToggle = activeKeyboardDropdown.querySelector('.dropdown-toggle');
+                                if (otherMenu && otherToggle) {
+                                    otherMenu.style.opacity = '0';
+                                    otherMenu.style.visibility = 'hidden';
+                                    otherToggle.setAttribute('aria-expanded', 'false');
+                                }
+                            }
+                            menu.style.opacity = '1';
+                            menu.style.visibility = 'visible';
+                            toggle.setAttribute('aria-expanded', 'true');
+                            activeKeyboardDropdown = dropdown;
+                            announceToScreenReader(toggle.querySelector('span')?.innerText + ' menu opened');
+                        }
+                        if (menuItems.length > 0) {
+                            menuItems[0].focus();
+                        }
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        if (!isExpanded) {
+                            // Close any other keyboard-opened dropdown first
+                            if (activeKeyboardDropdown && activeKeyboardDropdown !== dropdown) {
+                                const otherMenu = activeKeyboardDropdown.querySelector('.dropdown-menu');
+                                const otherToggle = activeKeyboardDropdown.querySelector('.dropdown-toggle');
+                                if (otherMenu && otherToggle) {
+                                    otherMenu.style.opacity = '0';
+                                    otherMenu.style.visibility = 'hidden';
+                                    otherToggle.setAttribute('aria-expanded', 'false');
+                                }
+                            }
+                            menu.style.opacity = '1';
+                            menu.style.visibility = 'visible';
+                            toggle.setAttribute('aria-expanded', 'true');
+                            activeKeyboardDropdown = dropdown;
+                            announceToScreenReader(toggle.querySelector('span')?.innerText + ' menu opened');
+                        }
+                        if (menuItems.length > 0) {
+                            menuItems[menuItems.length - 1].focus();
+                        }
+                        break;
+                }
+            });
+            
+            // Keyboard handling for menu items
+            menuItems.forEach((item, index) => {
+                item.setAttribute('role', 'menuitem');
+                item.setAttribute('tabindex', '0');
+                
+                item.addEventListener('keydown', function(e) {
+                    switch(e.key) {
+                        case 'Escape':
+                            e.preventDefault();
+                            menu.style.opacity = '0';
+                            menu.style.visibility = 'hidden';
+                            toggle.setAttribute('aria-expanded', 'false');
+                            activeKeyboardDropdown = null;
+                            toggle.focus();
+                            announceToScreenReader('Menu closed');
+                            break;
+                        case 'ArrowDown':
+                            e.preventDefault();
+                            const nextItem = menuItems[index + 1];
+                            if (nextItem) {
+                                nextItem.focus();
+                            } else {
+                                menuItems[0].focus();
+                            }
+                            break;
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            const prevItem = menuItems[index - 1];
+                            if (prevItem) {
+                                prevItem.focus();
+                            } else {
+                                menuItems[menuItems.length - 1].focus();
+                            }
+                            break;
+                        case 'Home':
+                            e.preventDefault();
+                            menuItems[0].focus();
+                            break;
+                        case 'End':
+                            e.preventDefault();
+                            menuItems[menuItems.length - 1].focus();
+                            break;
+                        case 'Tab':
+                            if (!e.shiftKey) {
+                                if (index === menuItems.length - 1) {
+                                    setTimeout(() => {
+                                        menu.style.opacity = '0';
+                                        menu.style.visibility = 'hidden';
+                                        toggle.setAttribute('aria-expanded', 'false');
+                                        activeKeyboardDropdown = null;
+                                    }, 10);
+                                }
+                            } else {
+                                if (index === 0) {
+                                    setTimeout(() => {
+                                        menu.style.opacity = '0';
+                                        menu.style.visibility = 'hidden';
+                                        toggle.setAttribute('aria-expanded', 'false');
+                                        activeKeyboardDropdown = null;
+                                    }, 10);
+                                }
+                            }
+                            break;
+                    }
+                });
+                
+                item.addEventListener('focus', function() {
+                    if (activeKeyboardDropdown === dropdown) {
+                        menu.style.opacity = '1';
+                        menu.style.visibility = 'visible';
+                        toggle.setAttribute('aria-expanded', 'true');
                     }
                 });
             });
             
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.nav-dropdown')) {
-                    dropdowns.forEach(dropdown => {
-                        const toggle = dropdown.querySelector('.dropdown-toggle');
-                        const menu = dropdown.querySelector('.dropdown-menu');
-                        if (menu && toggle && toggle.getAttribute('aria-expanded') === 'true') {
-                            menu.style.opacity = '0';
-                            menu.style.visibility = 'hidden';
-                            toggle.setAttribute('aria-expanded', 'false');
-                        }
-                    });
-                    activeKeyboardDropdown = null;
+            // FIX: Prevent hover/keyboard conflict
+            dropdown.addEventListener('mouseenter', function() {
+                if (activeKeyboardDropdown === dropdown) {
+                    menu.style.opacity = '';
+                    menu.style.visibility = '';
                 }
             });
             
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    dropdowns.forEach(dropdown => {
-                        const toggle = dropdown.querySelector('.dropdown-toggle');
-                        const menu = dropdown.querySelector('.dropdown-menu');
-                        if (menu && toggle && toggle.getAttribute('aria-expanded') === 'true') {
-                            menu.style.opacity = '0';
-                            menu.style.visibility = 'hidden';
-                            toggle.setAttribute('aria-expanded', 'false');
-                        }
-                    });
-                    activeKeyboardDropdown = null;
-                }
-            });
-            
-            // ============================================================
-            // BUG #6 FIXED: Register & Sign In buttons REJECT ALL DROPS
-            // ============================================================
-            
-            const registerBtn = document.getElementById('registerBtn');
-            const signinBtn = document.getElementById('signinBtn');
-            
-            function makeButtonRejectDrops(button) {
-                if (!button) return;
-                
-                button.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = 'none';
-                    this.style.opacity = '0.6';
-                    this.style.cursor = 'not-allowed';
-                });
-                
-                button.addEventListener('dragleave', function(e) {
-                    this.style.opacity = '';
-                    this.style.cursor = '';
-                });
-                
-                button.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.style.opacity = '';
-                    this.style.cursor = '';
-                });
-            }
-            
-            makeButtonRejectDrops(registerBtn);
-            makeButtonRejectDrops(signinBtn);
-            
-            // ============================================================
-            // BUG #7 FIXED: Detect mobile and disable drag & drop
-            // ============================================================
-            
-            function isTouchDevice() {
-                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            }
-            
-            function isMobileDevice() {
-                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            }
-            
-            const isMobile = isTouchDevice() || isMobileDevice();
-            
-            if (!isMobile) {
-                const draggableItems = document.querySelectorAll('.dropdown-link[draggable="true"], .plan-link[draggable="true"], .kids-card[draggable="true"]');
-                
-                draggableItems.forEach(item => {
-                    item.setAttribute('draggable', 'true');
-                    
-                    item.addEventListener('dragstart', function(e) {
-                        const textSpan = this.querySelector('span:not(.plan-price)');
-                        let dragText = textSpan ? textSpan.innerText.trim() : this.innerText.trim();
-                        
-                        e.dataTransfer.setData('text/plain', dragText);
-                        e.dataTransfer.effectAllowed = 'copy';
-                        this.style.opacity = '0.5';
-                    });
-                    
-                    item.addEventListener('dragend', function(e) {
-                        this.style.opacity = '';
-                    });
-                });
-            } else {
-                const draggableItems = document.querySelectorAll('.dropdown-link[draggable="true"], .plan-link[draggable="true"], .kids-card[draggable="true"]');
-                draggableItems.forEach(item => {
-                    item.setAttribute('draggable', 'false');
-                    item.style.cursor = 'pointer';
-                });
-            }
-            
-            // ============================================================
-            // MOBILE MENU FUNCTIONALITY (UPDATED FOR ALL DROPDOWNS)
-            // ============================================================
-            
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuPanel = document.getElementById('mobileMenuPanel');
-            const mobileTabs = document.querySelectorAll('.mobile-tab');
-            const mobileSections = document.querySelectorAll('.mobile-menu-section');
-            
-            // Helper to close all submenus
-            function closeAllMobileSubmenus() {
-                document.querySelectorAll('.mobile-submenu').forEach(sub => {
-                    sub.classList.remove('open');
-                });
-                document.querySelectorAll('.has-children').forEach(item => {
-                    item.classList.remove('open');
-                });
-            }
-            
-            // Toggle mobile menu
-            if (mobileMenuBtn && mobileMenuPanel) {
-                mobileMenuBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isOpen = mobileMenuPanel.classList.toggle('active');
-                    document.body.classList.toggle('menu-open', isOpen);
-                    
-                    const icon = this.querySelector('i');
-                    if (isOpen) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                        this.setAttribute('aria-expanded', 'true');
-                        
-                        // Activate Personal tab by default
-                        activateMobileTab('personal');
-                        
-                        // Close any open submenus
-                        closeAllMobileSubmenus();
-                        
-                        announceToScreenReader('Mobile menu opened');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        this.setAttribute('aria-expanded', 'false');
-                        announceToScreenReader('Mobile menu closed');
-                    }
-                });
-            }
-            
-            // Tab switching
-            function activateMobileTab(tabId) {
-                mobileTabs.forEach(tab => {
-                    const isActive = tab.getAttribute('data-tab') === tabId;
-                    tab.classList.toggle('active', isActive);
-                });
-                
-                mobileSections.forEach(section => {
-                    const isActive = section.id === `tab-${tabId}`;
-                    section.classList.toggle('active', isActive);
-                });
-                
-                // Scroll active tab into view
-                const activeTab = document.querySelector(`.mobile-tab[data-tab="${tabId}"]`);
-                if (activeTab) {
+            dropdown.addEventListener('mouseleave', function() {
+                if (activeKeyboardDropdown === dropdown) {
                     setTimeout(() => {
-                        activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }, 50);
+                        if (activeKeyboardDropdown === dropdown && !dropdown.matches(':hover')) {
+                            menu.style.opacity = '1';
+                            menu.style.visibility = 'visible';
+                            toggle.setAttribute('aria-expanded', 'true');
+                        }
+                    }, 100);
                 }
-            }
+            });
+        });
+        
+        // ============================================================
+        // BUG #6 FIXED: Register & Sign In buttons REJECT ALL DROPS
+        // ============================================================
+        
+        const registerBtn = document.getElementById('registerBtn');
+        const signinBtn = document.getElementById('signinBtn');
+        
+        function makeButtonRejectDrops(button) {
+            if (!button) return;
             
-            mobileTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    activateMobileTab(tabId);
+            button.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'none';
+                this.style.opacity = '0.6';
+                this.style.cursor = 'not-allowed';
+            });
+            
+            button.addEventListener('dragleave', function(e) {
+                this.style.opacity = '';
+                this.style.cursor = '';
+            });
+            
+            button.addEventListener('drop', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.style.opacity = '';
+                this.style.cursor = '';
+            });
+        }
+        
+        makeButtonRejectDrops(registerBtn);
+        makeButtonRejectDrops(signinBtn);
+        
+        // ============================================================
+        // BUG #7 FIXED: Detect mobile and disable drag & drop
+        // ============================================================
+        
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        }
+        
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
+        const isMobile = isTouchDevice() || isMobileDevice();
+        
+        if (!isMobile) {
+            const draggableItems = document.querySelectorAll('.dropdown-link[draggable="true"], .plan-link[draggable="true"], .kids-card[draggable="true"]');
+            
+            draggableItems.forEach(item => {
+                item.setAttribute('draggable', 'true');
+                
+                item.addEventListener('dragstart', function(e) {
+                    const textSpan = this.querySelector('span:not(.plan-price)');
+                    let dragText = textSpan ? textSpan.innerText.trim() : this.innerText.trim();
                     
-                    // Close any open submenus when switching tabs
+                    e.dataTransfer.setData('text/plain', dragText);
+                    e.dataTransfer.effectAllowed = 'copy';
+                    this.style.opacity = '0.5';
+                });
+                
+                item.addEventListener('dragend', function(e) {
+                    this.style.opacity = '';
+                });
+            });
+        } else {
+            const draggableItems = document.querySelectorAll('.dropdown-link[draggable="true"], .plan-link[draggable="true"], .kids-card[draggable="true"]');
+            draggableItems.forEach(item => {
+                item.setAttribute('draggable', 'false');
+                item.style.cursor = 'pointer';
+            });
+        }
+        
+        // ============================================================
+        // MOBILE MENU FUNCTIONALITY (UPDATED FOR ALL DROPDOWNS)
+        // ============================================================
+        
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+        const mobileTabs = document.querySelectorAll('.mobile-tab');
+        const mobileSections = document.querySelectorAll('.mobile-menu-section');
+        
+        // Helper to close all submenus
+        function closeAllMobileSubmenus() {
+            document.querySelectorAll('.mobile-submenu').forEach(sub => {
+                sub.classList.remove('open');
+            });
+            document.querySelectorAll('.has-children').forEach(item => {
+                item.classList.remove('open');
+            });
+        }
+        
+        // Toggle mobile menu
+        if (mobileMenuBtn && mobileMenuPanel) {
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = mobileMenuPanel.classList.toggle('active');
+                document.body.classList.toggle('menu-open', isOpen);
+                
+                const icon = this.querySelector('i');
+                if (isOpen) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    this.setAttribute('aria-expanded', 'true');
+                    
+                    // Activate Personal tab by default
+                    activateMobileTab('personal');
+                    
+                    // Close any open submenus
                     closeAllMobileSubmenus();
                     
-                    announceToScreenReader(`${this.textContent.trim()} tab selected`);
-                });
-            });
-            
-            // Handle ALL dropdown toggles (Accounts, Smart Spending, Security, etc.)
-            document.querySelectorAll('.has-children').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const submenuId = this.getAttribute('data-submenu');
-                    const submenu = document.getElementById(`submenu-${submenuId}`);
-                    
-                    if (submenu) {
-                        const isOpen = submenu.classList.toggle('open');
-                        this.classList.toggle('open', isOpen);
-                        
-                        // Get the menu name from the span
-                        const menuName = this.querySelector('span')?.textContent || 'Submenu';
-                        announceToScreenReader(isOpen ? `${menuName} expanded` : `${menuName} collapsed`);
-                    }
-                });
-            });
-            
-            // Close menu when clicking on links (but not on dropdown toggles)
-            document.querySelectorAll('.mobile-menu-item[href], .mobile-btn').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Don't close if it's the parent dropdown toggle
-                    if (this.classList.contains('has-children')) return;
-                    
-                    if (mobileMenuPanel) {
-                        mobileMenuPanel.classList.remove('active');
-                        document.body.classList.remove('menu-open');
-                        const icon = mobileMenuBtn?.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                        if (mobileMenuBtn) {
-                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                        }
-                    }
-                });
-            });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
-                    if (!mobileMenuPanel.contains(e.target) && !mobileMenuBtn?.contains(e.target)) {
-                        mobileMenuPanel.classList.remove('active');
-                        document.body.classList.remove('menu-open');
-                        const icon = mobileMenuBtn?.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-                    }
-                }
-            });
-            
-            // ============================================================
-            // FIX #5: Close mobile menu on browser back/forward navigation
-            // ============================================================
-            
-            // Handle page show event (fires when page is loaded/restored from bfcache)
-            window.addEventListener('pageshow', function() {
-                if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
-                    mobileMenuPanel.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                    
-                    const icon = mobileMenuBtn?.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                    
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                    }
-                    
+                    announceToScreenReader('Mobile menu opened');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    this.setAttribute('aria-expanded', 'false');
                     announceToScreenReader('Mobile menu closed');
                 }
             });
+        }
+        
+        // Tab switching
+        function activateMobileTab(tabId) {
+            mobileTabs.forEach(tab => {
+                const isActive = tab.getAttribute('data-tab') === tabId;
+                tab.classList.toggle('active', isActive);
+            });
             
-            // Handle popstate event (fires when active history entry changes)
-            window.addEventListener('popstate', function() {
-                if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
+            mobileSections.forEach(section => {
+                const isActive = section.id === `tab-${tabId}`;
+                section.classList.toggle('active', isActive);
+            });
+            
+            // Scroll active tab into view
+            const activeTab = document.querySelector(`.mobile-tab[data-tab="${tabId}"]`);
+            if (activeTab) {
+                setTimeout(() => {
+                    activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }, 50);
+            }
+        }
+        
+        mobileTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                activateMobileTab(tabId);
+                
+                // Close any open submenus when switching tabs
+                closeAllMobileSubmenus();
+                
+                announceToScreenReader(`${this.textContent.trim()} tab selected`);
+            });
+        });
+        
+        // Handle ALL dropdown toggles (Accounts, Smart Spending, Security, etc.)
+        document.querySelectorAll('.has-children').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const submenuId = this.getAttribute('data-submenu');
+                const submenu = document.getElementById(`submenu-${submenuId}`);
+                
+                if (submenu) {
+                    const isOpen = submenu.classList.toggle('open');
+                    this.classList.toggle('open', isOpen);
+                    
+                    // Get the menu name from the span
+                    const menuName = this.querySelector('span')?.textContent || 'Submenu';
+                    announceToScreenReader(isOpen ? `${menuName} expanded` : `${menuName} collapsed`);
+                }
+            });
+        });
+        
+        // Close menu when clicking on links (but not on dropdown toggles)
+        document.querySelectorAll('.mobile-menu-item[href], .mobile-btn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Don't close if it's the parent dropdown toggle
+                if (this.classList.contains('has-children')) return;
+                
+                if (mobileMenuPanel) {
                     mobileMenuPanel.classList.remove('active');
                     document.body.classList.remove('menu-open');
-                    
                     const icon = mobileMenuBtn?.querySelector('i');
                     if (icon) {
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
                     }
-                    
                     if (mobileMenuBtn) {
                         mobileMenuBtn.setAttribute('aria-expanded', 'false');
                     }
                 }
             });
-            
-            // Also close menu when page becomes hidden (user switches tabs)
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden && mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
-                    mobileMenuPanel.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                    
-                    const icon = mobileMenuBtn?.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                    
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                    }
-                }
-            });
-            
-            // Close on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && mobileMenuPanel?.classList.contains('active')) {
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
+                if (!mobileMenuPanel.contains(e.target) && !mobileMenuBtn?.contains(e.target)) {
                     mobileMenuPanel.classList.remove('active');
                     document.body.classList.remove('menu-open');
                     const icon = mobileMenuBtn?.querySelector('i');
@@ -3002,63 +3256,138 @@
                     }
                     mobileMenuBtn?.setAttribute('aria-expanded', 'false');
                 }
-            });
-            
-            // ============================================================
-            // BUG #12 FIXED: Lazy Loading for Dropdown Content
-            // ============================================================
-            
-            const loadedDropdowns = new Set();
-            
-            function lazyLoadDropdown(dropdown) {
-                const menuId = dropdown.getAttribute('data-menu-id');
-                if (!menuId || loadedDropdowns.has(menuId)) return;
-                
-                const menu = dropdown.querySelector('.dropdown-menu');
-                if (menu && menu.hasAttribute('data-lazy')) {
-                    loadedDropdowns.add(menuId);
-                    menu.removeAttribute('data-lazy');
-                }
             }
-            
-            document.querySelectorAll('.nav-dropdown').forEach((dropdown, idx) => {
-                const menuId = `dropdown_${idx}`;
-                dropdown.setAttribute('data-menu-id', menuId);
-                
-                const menu = dropdown.querySelector('.dropdown-menu');
-                if (menu) {
-                    menu.setAttribute('data-lazy', 'true');
-                }
-                
-                dropdown.addEventListener('mouseenter', () => lazyLoadDropdown(dropdown));
-                dropdown.addEventListener('click', () => lazyLoadDropdown(dropdown));
-            });
-            
-            // ============================================================
-            // Refresh functionality
-            // ============================================================
-            
-            const refreshLinks = document.querySelectorAll('.refresh-page');
-            refreshLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = this.getAttribute('data-url');
-                    if (url) {
-                        sessionStorage.setItem('redirectAfterRefresh', url);
-                        window.location.reload();
-                    }
-                });
-            });
-            
-            const redirectUrl = sessionStorage.getItem('redirectAfterRefresh');
-            if (redirectUrl) {
-                sessionStorage.removeItem('redirectAfterRefresh');
-                window.location.href = redirectUrl;
-            }
-            
-            console.log('✅ All bugs fixed! Mouse hover, keyboard navigation, and mobile dropdowns all work perfectly!');
         });
-    </script>
+        
+        // ============================================================
+        // FIX #5: Close mobile menu on browser back/forward navigation
+        // ============================================================
+        
+        // Handle page show event (fires when page is loaded/restored from bfcache)
+        window.addEventListener('pageshow', function() {
+            if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
+                mobileMenuPanel.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                
+                const icon = mobileMenuBtn?.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+                
+                announceToScreenReader('Mobile menu closed');
+            }
+        });
+        
+        // Handle popstate event (fires when active history entry changes)
+        window.addEventListener('popstate', function() {
+            if (mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
+                mobileMenuPanel.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                
+                const icon = mobileMenuBtn?.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+        
+        // Also close menu when page becomes hidden (user switches tabs)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && mobileMenuPanel && mobileMenuPanel.classList.contains('active')) {
+                mobileMenuPanel.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                
+                const icon = mobileMenuBtn?.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenuPanel?.classList.contains('active')) {
+                mobileMenuPanel.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                const icon = mobileMenuBtn?.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // ============================================================
+        // BUG #12 FIXED: Lazy Loading for Dropdown Content
+        // ============================================================
+        
+        const loadedDropdowns = new Set();
+        
+        function lazyLoadDropdown(dropdown) {
+            const menuId = dropdown.getAttribute('data-menu-id');
+            if (!menuId || loadedDropdowns.has(menuId)) return;
+            
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu && menu.hasAttribute('data-lazy')) {
+                loadedDropdowns.add(menuId);
+                menu.removeAttribute('data-lazy');
+            }
+        }
+        
+        document.querySelectorAll('.nav-dropdown').forEach((dropdown, idx) => {
+            const menuId = `dropdown_${idx}`;
+            dropdown.setAttribute('data-menu-id', menuId);
+            
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) {
+                menu.setAttribute('data-lazy', 'true');
+            }
+            
+            dropdown.addEventListener('mouseenter', () => lazyLoadDropdown(dropdown));
+            dropdown.addEventListener('click', () => lazyLoadDropdown(dropdown));
+        });
+        
+        // ============================================================
+        // Refresh functionality
+        // ============================================================
+        
+        const refreshLinks = document.querySelectorAll('.refresh-page');
+        refreshLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('data-url');
+                if (url) {
+                    sessionStorage.setItem('redirectAfterRefresh', url);
+                    window.location.reload();
+                }
+            });
+        });
+        
+        const redirectUrl = sessionStorage.getItem('redirectAfterRefresh');
+        if (redirectUrl) {
+            sessionStorage.removeItem('redirectAfterRefresh');
+            window.location.href = redirectUrl;
+        }
+        
+        console.log('✅ All bugs fixed! Icons-only mode dropdowns now work with clicks!');
+    });
+</script>
 
 </body>
 </html>
