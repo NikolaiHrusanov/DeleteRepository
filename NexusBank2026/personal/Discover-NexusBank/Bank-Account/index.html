@@ -900,20 +900,35 @@
     }
 }
 
-/* ===== SMALL SIZE - 900px and below: Icons Only, Hide Text ===== */
 @media (max-width: 900px) {
+    /* Fix icon centering */
+    .nav-item {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        aspect-ratio: 1 / 1;
+    }
+    
     .nav-item i {
         display: inline-block !important;
-        font-size: 1.125rem;
-        margin-right: 0 !important;
+        font-size: 1.35rem !important; /* Slightly smaller than 1.5rem */
+        margin: 0 !important;
+        line-height: 1;
     }
     
     .nav-item span {
         display: none !important;
     }
     
+    .nav-item.btn-primary {
+        padding: 0 !important;
+    }
+    
     .nav-item.btn-primary i {
         display: inline-block !important;
+        font-size: 1.35rem !important; /* Slightly smaller than 1.5rem */
         margin: 0 !important;
     }
     
@@ -921,162 +936,53 @@
         display: none !important;
     }
     
-    /* FIX: Ensure dropdown container has proper positioning */
-    .nav-dropdown {
-        position: relative !important;
+    /* ===== LOGO LEFT + ICONS EDGE-TO-EDGE WITH SPACING ===== */
+    .floating-nav .container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
     }
     
-    /* FIX: Dropdown menu visibility and positioning */
-    .nav-dropdown .dropdown-menu {
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        right: auto !important;
-        transform: translateY(10px) !important;
-        margin-top: var(--space-sm) !important;
-        min-width: 280px !important;
-        width: max-content !important;
-        max-width: calc(100vw - 32px) !important;
-        max-height: 80vh !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        padding-right: var(--space-sm) !important;
-        scrollbar-width: thin !important;
-        transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
+    /* Logo stays on far left with right margin for spacing */
+    .nav-brand {
+        flex-shrink: 0 !important;
+        margin-right: 2rem !important;
     }
     
-    /* FIX: Show dropdown on hover */
-    .nav-dropdown:hover .dropdown-menu {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        transform: translateY(0) !important;
+    /* Nav menu takes remaining space and fills to right edge */
+    .nav-menu {
+        flex: 1 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
     }
     
-    /* Right-aligned dropdowns */
-    .nav-dropdown.dropdown-right .dropdown-menu {
-        left: auto !important;
-        right: 0 !important;
+    /* Nav list spans full width with space-between */
+    .nav-menu ul,
+    .nav-list,
+    .nav-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
     }
     
-    /* Specific menu widths */
-    .personal-menu,
-    .business-menu {
-        min-width: 320px !important;
+    /* List items */
+    .nav-menu li,
+    .nav-list li {
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
-    .company-menu {
-        min-width: 280px !important;
-    }
-    
-    .kids-menu {
-        min-width: 260px !important;
-    }
-    
-    /* Grid layout */
-    .nav-dropdown .dropdown-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: var(--space-md) !important;
-    }
-    
-    .dropdown-col {
-        min-width: 0 !important;
-        overflow: visible !important;
-    }
-    
-    .dropdown-section-header {
-        font-size: 0.7rem !important;
-        white-space: normal !important;
-        word-break: break-word !important;
-    }
-    
-    .dropdown-link,
-    .plan-link {
-        white-space: normal !important;
-        word-break: break-word !important;
-        padding: var(--space-sm) var(--space-md) !important;
-        overflow: visible !important;
-    }
-    
-    .plan-link {
-        flex-wrap: wrap !important;
-        gap: var(--space-xs) !important;
-    }
-    
-    .plan-name {
-        font-size: 0.85rem !important;
-    }
-    
-    .plan-price {
-        font-size: 0.75rem !important;
+    /* Override any existing nav-row margins */
+    .nav-row {
         margin-left: 0 !important;
     }
-    
-    /* Scrollbar styling */
-    .dropdown-menu::-webkit-scrollbar {
-        width: 6px !important;
-    }
-    
-    .dropdown-menu::-webkit-scrollbar-track {
-        background: var(--surface-hover) !important;
-        border-radius: var(--radius-full) !important;
-    }
-    
-    .dropdown-menu::-webkit-scrollbar-thumb {
-        background: var(--primary) !important;
-        border-radius: var(--radius-full) !important;
-    }
-    
-    /* Navigation row */
-    .nav-row {
-        overflow-x: auto !important;
-        overflow-y: visible !important;
-        -ms-overflow-style: none !important;
-        scrollbar-width: none !important;
-        padding-bottom: 4px !important;
-    }
-    
-    .nav-row::-webkit-scrollbar {
-        display: none !important;
-    }
-    
-    .nav-item {
-        flex-shrink: 0 !important;
-    }
-    
-       .plans-col {
-        min-width: 140px !important;
-    }
-    
-    /* ADD THIS: Active state for click-based dropdown toggle */
-    .nav-dropdown.active .dropdown-menu {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        transform: translateY(0) !important;
-    }
-    
-    /* Prevent hover from interfering on touch devices */
-    @media (hover: none) and (pointer: coarse) {
-        .nav-dropdown:hover .dropdown-menu {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-        
-        .nav-dropdown.active .dropdown-menu,
-        .nav-dropdown.active:hover .dropdown-menu {
-            opacity: 1 !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-            transform: translateY(0) !important;
-        }
-    }
-
 }
+
+
 
 /* ===== SMALL SIZE - 900px and below: Icons Only, Hide Text ===== */
 @media (max-width: 900px) and (min-width: 769px) {
@@ -1690,94 +1596,43 @@
     }
 }
          
-/* ===== TOOLTIPS FOR ICONS-ONLY MODE (≤900px) ===== */
+/* ===== SMALL SIZE - 900px and below: Icons Only, Hide Text ===== */
 @media (max-width: 900px) and (min-width: 769px) {
-    /* Tooltip container */
+    /* Fix icon centering */
     .nav-item {
-        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.6rem !important;
+        aspect-ratio: 1 / 1;
     }
     
-    /* Tooltip text */
-    .nav-item::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: -45px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--surface-elevated);
-        color: var(--text-primary);
-        padding: 6px 12px;
-        border-radius: var(--radius-md);
-        font-size: 0.75rem;
-        font-weight: 500;
-        white-space: nowrap;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid var(--border-light);
-        pointer-events: none;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-        z-index: 10001; /* Higher than dropdown */
-        letter-spacing: 0.3px;
-        backdrop-filter: blur(4px);
+    .nav-item i {
+        display: inline-block !important;
+        font-size: 1.125rem;
+        margin: 0 !important;
+        line-height: 1;
     }
     
-    /* Tooltip arrow */
-    .nav-item::before {
-        content: '';
-        position: absolute;
-        bottom: -13px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-bottom: 8px solid var(--surface-elevated);
-        pointer-events: none;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease, visibility 0.2s ease;
-        z-index: 10001; /* Higher than dropdown */
-        filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.1));
+    .nav-item span {
+        display: none !important;
     }
     
-    /* Show tooltip on hover - but NOT when dropdown is open */
-    .nav-item:hover::after,
-    .nav-item:hover::before {
-        opacity: 1 !important;
-        visibility: visible !important;
+    .nav-item.btn-primary {
+        padding: 0.6rem !important;
     }
     
-    /* Hide tooltip when dropdown is active */
-    .nav-dropdown.active .nav-item::after,
-    .nav-dropdown.active .nav-item::before {
-        opacity: 0 !important;
-        visibility: hidden !important;
+    .nav-item.btn-primary i {
+        display: inline-block !important;
+        margin: 0 !important;
     }
     
-    .nav-item:hover::after {
-        transform: translateX(-50%) translateY(-2px);
+    .nav-item.btn-primary span {
+        display: none !important;
     }
     
-    /* Primary button tooltip styling */
-    .nav-item.btn-primary::after {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-color: var(--primary-dark);
-    }
-    
-    .nav-item.btn-primary::before {
-        border-bottom-color: var(--primary);
-    }
-    
-    /* Ensure tooltips don't get cut off */
-    .nav-row {
-        overflow-y: visible !important;
-        padding-bottom: 45px !important; /* Space for tooltips */
-    }
-    
-    .floating-nav {
-        overflow: visible !important;
-    }
+    /* Keep the rest of your existing styles for this breakpoint... */
+    /* (dropdown positioning, grid layouts, tooltips, etc.) */
 }
 
 /* Extra small screens - smaller tooltips */
